@@ -40,9 +40,11 @@ Boundaries:
 rumruay/
 ├── product/       # Spec (synced into products-dev via sparse submodule)
 ├── packages/
-│   ├── core/      # @rumruay/core — money, ledger, net worth math
-│   └── mcp/       # @rumruay/mcp — MCP server (stdio)
-└── scripts/       # new-package.mjs (@rumruay scope)
+│   └── core/      # @rumruay/core — money, ledger, net worth math
+├── apps/
+│   ├── mcp/       # @rumruay/mcp — MCP server (stdio)
+│   └── cli/       # @rumruay/cli — terminal CLI
+└── skills/        # Agent-readable operation guides
 ```
 
 ---

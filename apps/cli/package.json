@@ -1,0 +1,50 @@
+{
+  "name": "@rumruay/cli",
+  "version": "0.1.0",
+  "description": "rumruay CLI: personal finance on the terminal (accounts, transactions, net worth).",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "rumruay": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "tsup && vitest run --passWithNoTests",
+    "test:watch": "vitest --passWithNoTests",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm test && npm run typecheck"
+  },
+  "dependencies": {
+    "@rumruay/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.0"
+  },
+  "keywords": [
+    "finance",
+    "personal-finance",
+    "cli",
+    "terminal"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

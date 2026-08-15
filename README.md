@@ -17,7 +17,9 @@ grow over time.
 The repo is a **pnpm monorepo**:
 
 - [`@rumruay/core`](packages/core) — domain logic: money (decimal.js), ledger, balances, net worth
-- [`@rumruay/mcp`](packages/mcp) — the MCP server exposing finance tools over stdio
+- [`@rumruay/mcp`](apps/mcp) — the MCP server exposing finance tools over stdio
+- [`@rumruay/cli`](apps/cli) — terminal CLI for the same ledger (persists to `~/.rumruay/ledger.json`)
+- [`skills/`](skills) — agent-readable operation guides for the CLI
 
 ## Quick Start
 
@@ -25,6 +27,15 @@ The repo is a **pnpm monorepo**:
 pnpm install
 pnpm build
 pnpm test
+```
+
+## CLI
+
+```bash
+pnpm --filter @rumruay/cli build
+node apps/cli/dist/index.js account add wallet Wallet --type cash
+node apps/cli/dist/index.js tx add wallet 50000 salary --date 2026-08-01
+node apps/cli/dist/index.js net-worth
 ```
 
 ## Run the MCP server
@@ -60,8 +71,11 @@ rumruay/
 ├── product/              # Product spec (tracked via products-dev sparse submodule)
 │   └── spec.md           # Repository specification
 ├── packages/
-│   ├── core/             # @rumruay/core — money, ledger, net worth math
-│   └── mcp/              # @rumruay/mcp — MCP server (stdio)
+│   └── core/             # @rumruay/core — money, ledger, net worth math
+├── apps/
+│   ├── mcp/              # @rumruay/mcp — MCP server (stdio)
+│   └── cli/              # @rumruay/cli — terminal CLI
+├── skills/               # Agent-readable operation guides
 └── scripts/
     └── new-package.mjs   # Package scaffolder (@rumruay scope)
 ```
