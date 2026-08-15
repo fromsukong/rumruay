@@ -1,32 +1,54 @@
-# Repository Specification: `{repo-name}`
+# Repository Specification: `rumruay`
 
-> **Belongs to Product**: [`{product-name}`](../../../products/{product-name}/prd.md)  
-> **Repository URL**: [`https://github.com/fromsukong/{repo-name}`](https://github.com/fromsukong/{repo-name})  
-> **Visibility**: Public  
-> **Maintainer**: @fromsukong  
+> **Belongs to Product**: [`rumruay`](../../../products/rumruay/prd.md)
+> **Repository URL**: [`https://github.com/fromsukong/rumruay`](https://github.com/fromsukong/rumruay)
+> **Visibility**: Public
+> **Maintainer**: @fromsukong
 
 ---
 
 ## 1. Description & Scope
-Replace me: what this repository is for, what it does, and its boundaries within the `@fromsukong` ecosystem.
+
+`rumruay` (ร่ำรวย — "get rich") is Prame's personal finance toolkit, delivered as an
+MCP (Model Context Protocol) server. It gives AI agents a durable, correct way to
+track and reason about personal money: income, expenses, account balances, spending
+by category, and net worth.
+
+Boundaries:
+
+- **In scope**: money math, ledger/transactions, balances, net worth, spending analysis, MCP tools.
+- **Out of scope** (for now): bank integrations, budgeting engine, investment analysis, multi-user.
 
 ---
 
 ## 2. Tech Stack & Environment
-- **Language**: TBD
-- **Package Manager**: TBD
-- **Runtime**: TBD
+
+- **Language**: TypeScript (strict, ESM)
+- **Package Manager**: pnpm (workspaces monorepo)
+- **Runtime**: Node.js >= 18
+- **Build**: tsup
+- **Lint/Format**: Biome
+- **Tests**: Vitest
+- **Money math**: decimal.js (no float drift)
+- **MCP**: @modelcontextprotocol/sdk (stdio transport), zod schemas
 
 ---
 
 ## 3. Directory Structure
+
 ```
-{repo-name}/
+rumruay/
 ├── product/       # Spec (synced into products-dev via sparse submodule)
-└── src/           # Source code
+├── packages/
+│   ├── core/      # @rumruay/core — money, ledger, net worth math
+│   └── mcp/       # @rumruay/mcp — MCP server (stdio)
+└── scripts/       # new-package.mjs (@rumruay scope)
 ```
 
 ---
 
 ## 4. Integration Contracts
-- **Products-dev**: registered as a sparse submodule at `products-dev/repos/{repo-name}` (checks out `product/` only).
+
+- **Products-dev**: registered as a sparse submodule at `products-dev/repos/rumruay` (checks out `product/` only).
+- **MCP clients**: connect via stdio; server name `rumruay`, version `0.1.0`.
+- **Currency**: THB default, ISO 4217 codes supported by `Money`.

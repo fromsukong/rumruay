@@ -1,0 +1,40 @@
+{
+  "name": "@rumruay/workspace-root",
+  "private": true,
+  "version": "0.0.0",
+  "description": "rumruay (ร่ำรวย) — personal finance MCP monorepo",
+  "type": "module",
+  "packageManager": "pnpm@11.9.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "new": "node scripts/new-package.mjs",
+    "build": "pnpm --filter @rumruay/core build && pnpm -r --filter '!@rumruay/core' build",
+    "build:core": "pnpm --filter @rumruay/core build",
+    "build:mcp": "pnpm --filter @rumruay/mcp build",
+    "build:all": "pnpm -r --parallel build",
+    "test": "pnpm build:core && pnpm -r test",
+    "test:core": "pnpm --filter @rumruay/core test",
+    "test:mcp": "pnpm --filter @rumruay/mcp test",
+    "typecheck": "pnpm build:core && pnpm -r typecheck",
+    "typecheck:core": "pnpm --filter @rumruay/core typecheck",
+    "typecheck:mcp": "pnpm --filter @rumruay/mcp typecheck",
+    "dev:core": "pnpm --filter @rumruay/core dev",
+    "dev:mcp": "pnpm --filter @rumruay/mcp dev",
+    "lint": "biome lint",
+    "format": "biome format --write",
+    "check": "biome check",
+    "fix": "biome check --write",
+    "clean": "pnpm -r exec rm -rf dist",
+    "clean:core": "rm -rf packages/core/dist",
+    "clean:mcp": "rm -rf packages/mcp/dist"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.2",
+    "@types/node": "^26.1.0",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  }
+}
